@@ -9,7 +9,7 @@ This repository presents the code for the first part only.
 
 ## Segmentation Task
 
-The aim of this step was to segment the pancreas and all its regions. The resulting number of segmentation classes was 4 classes of pancreatic regions + background class. PyTorch implementation of the original **3D U-Net** architecture (https://arxiv.org/pdf/1606.06650v1.pdf) was used as the underlying machine learning model.
+The aim of this step was to segment the pancreas and all its regions. The resulting number of segmentation classes was four classes of pancreatic regions + background class. PyTorch implementation of the original **3D U-Net** architecture (https://arxiv.org/pdf/1606.06650v1.pdf) was used as the underlying machine learning model.
 
 3D segmentation task is computationally intensive due to the large size of the medical input data. Therefore, several approaches to **preprocessing the data** were explored:
 1) Compressing original images of size (512, 512, N) to size (128, 128, 128) with quality degradation.
@@ -32,7 +32,24 @@ Total three datasets were used:
 - Medical Segmentation Decathlon open dataset
 - MICCAI FLARE 2023 open dataset
 
-Open datasets containing only pancreas and tumor tags were further segmented into 4 classes.
+Open datasets containing only pancreas and tumor tags were further segmented into four classes.
+
+
+## Contents description
+
+- **data_transform.py** - Assembly decathlon dataset from dicom files to 3D numpy arrays
+
+- **decathlon_window_parameters.csv** - Additional file with information for dataset transformation
+
+- **final_dataset_collector.py** - Pipeline for assembling a dataset from three different sources into a single format
+
+-----------------------------------------------------------------------------------------------
+
+- **DSUnet_on_three_datasets.ipynb** - Data preparation and model training with reduced input data size
+
+- **CroppedUnet_on_three_datasets.ipynb** - Data preparation and model training with area of interest cropping out
+
+- **PatchUnet_on_three_datasets.ipynb** - Data preparation and model training with data splitting into patches
 
 
 ## Results
@@ -47,7 +64,7 @@ Open datasets containing only pancreas and tumor tags were further segmented int
     <table>
         <tr>
             <th rowspan="2">Algorithm</th>
-            <th colspan="4">Dice Score</th>
+            <th colspan="4">Validation Dice Score</th>
         </tr>
         <tr>
             <th>Head</th>
